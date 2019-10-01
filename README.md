@@ -2,7 +2,9 @@
 *Dynamic row to column pivotation/transpose in Postgres made simple.*
 
 Original author: Hannes Landeholm <hannes.landeholm@gmail.com>
+
 Modified by: Klas af Geijerstam for the course '5DV187' at Umeå university.
+
 `colpivot.sql` defines a single Postgres function:
 
     create or replace function colpivot(
