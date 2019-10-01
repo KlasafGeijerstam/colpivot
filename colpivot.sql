@@ -2,13 +2,14 @@
 -- This Source Code Form is subject to the terms of the Mozilla Public
 -- License, v. 2.0. If a copy of the MPL was not distributed with this
 -- file, You can obtain one at http://mozilla.org/MPL/2.0/.
--- Modified by Klas af Geijerstam to drop an extra auxiliary field.
+-- Modified by Klas af Geijerstam to drop an extra auxiliary field,
+-- 2019-10-01
 -- See the README.md file distributed with this project for documentation.
 create or replace function colpivot(
     out_table varchar, in_query varchar,
     key_cols varchar[], class_cols varchar[],
     value_e varchar, col_order varchar,
-    obscol varchar
+    drop_cols varchar[]
 ) returns void as $$
     declare
         in_table varchar;
@@ -116,7 +117,10 @@ create or replace function colpivot(
         end loop;
         -- raise notice '%', query;
         execute ('create temp table ' || quote_ident(out_table) || ' on commit drop as ' || query);
-        ALTER TABLE qoute_ident(out_table) DROP COLUMN qoute_ident(obscol);
+        --Drop aux columns
+        foreach col in array drop_cols loop
+            execute ('ALTER TABLE ' || quote_ident(out_table) || ' DROP COLUMN ' || quote_ident(col));
+        end loop;
         -- cleanup temporary in_table before we return
         execute ('drop table ' || in_table)
         return;
