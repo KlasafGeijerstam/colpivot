@@ -76,6 +76,8 @@ For example, you may want to have the class with the highest salary as the
 first column. In that case you can specify `sum(salary) desc`.
 You can also (ab)use this parameter to limit the number of columns returned
 like: `sum(salary) desc limit 10` to only get the 10 highest salaries.
+* **`drop_cols`** [1] - Auxiliary columns to be dropped from the created
+temporary table.
 
 [1] These parameters are concatenated directly in evaluated queries to allow
 maximum flexibility for the caller and therefore unsafe. Ensure that you
