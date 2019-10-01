@@ -1,0 +1,5 @@
+# nvlfunc extension
+comment = 'Dynamic pivot plugin'
+default_version = '1.0'
+module_pathname = '$libdir/colpivot'
+relocatable = false
